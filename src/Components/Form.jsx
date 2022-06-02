@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./Table";
+import axios from "axios";
+import MyForm from "./MyForm"
+
 const Form = () => {
-    const [userdata, setuserdata] = useState([]);
-    const [form, setform] = useState({});
+  const [userdata, setuserdata] = useState([]);
+  const [form, setform] = useState({
+    username: "",
+    age: "",
+    department: "",
+    address: "",
+    salary: "",
+  });
   const handleChange = (e) => {
     let { checked, type, name, value, files } = e.target;
     if (type === "checkbox") {
@@ -24,12 +33,33 @@ const Form = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newdata = { ...form, id: new Date().getTime().toString() };
-    setuserdata([...userdata, newdata]);
-    setform({ username: "", age: "", department: "", address: "", salary: "" });
-};
 
+    axios
+      .post(`http://localhost:3002/data`, form)
+      .then((r) => {
+        getData();
+        setform({
+          username: "",
+          age: "",
+          department: "",
+          address: "",
+          salary: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const getData = () => {
+    axios.get(`http://localhost:3002/data`).then((res) => {
+      setuserdata([...res.data]);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
@@ -116,9 +146,9 @@ const Form = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-
       <div>
-          <Table data={userdata}/>
+        {/* <Table data={userdata} /> */}
+        <MyForm data={userdata}/>
       </div>
     </div>
   );

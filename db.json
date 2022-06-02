@@ -1,3 +1,31 @@
-{"data":[
-    {}
-]}
+{
+  "data": [
+    {
+      "username": "kunda",
+      "age": "23",
+      "department": "computer",
+      "address": "dehri ",
+      "salary": "74000",
+      "unmarried": true,
+      "id": 1
+    },
+    {
+      "username": "kunda",
+      "age": "23",
+      "department": "computer",
+      "address": "dehri ",
+      "salary": "74000",
+      "unmarried": true,
+      "id": 2
+    },
+    {
+      "username": "Ashu",
+      "age": "22",
+      "department": "computer",
+      "address": "azamgadh",
+      "salary": "30000",
+      "married": true,
+      "id": 3
+    }
+  ]
+}
